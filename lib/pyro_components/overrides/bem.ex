@@ -614,6 +614,66 @@ defmodule PyroComponents.Overrides.BEM do
   end
 
   ##############################################################################
+  ####    D R O P D O W N
+  ##############################################################################
+
+  @prefix_dropdown @prefix <> "dropdown"
+  override PyroComponents.Components.Dropdown, :dropdown do
+    set :class, @prefix_dropdown
+    set :items_wrapper_class, @prefix_dropdown <> "__items_wrapper"
+    set :item_class, @prefix_dropdown <> "__item"
+    set :icon_class, @prefix_dropdown <> "__icon"
+    set :trigger_btn_class, &__MODULE__.dropdown_trigger_btn_class/1
+    set :no_label_icon_name, "hero-ellipsis-vertical-solid"
+    set :hide_js, &__MODULE__.dropdown_hide_js/2
+    set :toggle_js, &__MODULE__.dropdown_toggle_js/2
+  end
+
+  def dropdown_trigger_btn_class(passed_assigns) do
+    label = passed_assigns[:label]
+    trigger = passed_assigns[:trigger]
+
+    suffix =
+      case {label, trigger} do
+        {nil, []} -> "__no_label"
+        {_label, []} -> "__with_label"
+        {_label, _trigger} -> "__with_label_and_trigger"
+      end
+    [
+      @prefix_dropdown <> "__trigger_button" <> suffix,
+      passed_assigns[:trigger_btn_class]
+    ]
+  end
+
+  @dropdown_transition_in_base "transition transform ease-out duration-100"
+  @dropdown_transition_in_start "transform opacity-0 scale-95"
+  @dropdown_transition_in_end "transform opacity-100 scale-100"
+
+  @dropdown_transition_out_base "transition ease-in duration-75"
+  @dropdown_transition_out_start "transform opacity-100 scale-100"
+  @dropdown_transition_out_end "transform opacity-0 scale-95"
+
+  def dropdown_hide_js(js \\ %JS{}, options_container_id) do
+    JS.hide(js,
+      to: "##{options_container_id}",
+      transition: {@dropdown_transition_out_base, @dropdown_transition_out_start, @dropdown_transition_out_end}
+    )
+  end
+
+  def dropdown_toggle_js(js \\ %JS{}, options_container_id) do
+    JS.toggle(js,
+      to: "##{options_container_id}",
+      display: "block",
+      in: {@dropdown_transition_in_base, @dropdown_transition_in_start, @dropdown_transition_in_end},
+      out: {@dropdown_transition_out_base, @dropdown_transition_out_start, @dropdown_transition_out_end}
+    )
+  end
+
+  override PyroComponents.Components.Dropdown, :dropdown_item do
+    set :class, @prefix_dropdown <> "__item"
+  end
+
+  ##############################################################################
   ####    L I V E    C O M P O N E N T S
   ##############################################################################
 

@@ -966,3 +966,36 @@ textarea.pyro_input__input {
 .pyro_pagination__limit_form_input_option {
   @apply appearance-none bg-white text-black dark:bg-slate-900 dark:text-white selected:bg-slate-500 selected:text-white dark:selected:bg-slate-500 dark:selected:text-white;
 }
+
+/* Dropdown */
+
+.pyro_dropdown {
+  @apply relative inline-block text-left;
+}
+.pyro_dropdown__icon {
+  @apply w-5 h-5 ml-2 -mr-1 dark:text-white;
+}
+.pyro_dropdown__items_wrapper {
+  @apply absolute z-30 w-56 mt-2 bg-white rounded-md shadow-lg dark:bg-slate-900 ring-1 ring-black ring-opacity-5 focus:outline-none;
+}
+.pyro_dropdown__menu_items_wrapper_placement__left {
+  @apply right-0 origin-top-right;
+}
+.pyro_dropdown__menu_items_wrapper_placement__right {
+  @apply left-0 origin-top-left;
+}
+.pyro_dropdown__item {
+  @apply flex items-center self-start justify-start w-full gap-2 px-4 py-2 text-sm text-left text-slate-700 transition duration-150 ease-in-out dark:hover:bg-slate-700 dark:text-slate-300 dark:bg-slate-800 hover:bg-slate-100 rounded-md;
+}
+.pyro_dropdown__trigger_button__no_label {
+  @apply flex items-center text-slate-400 rounded-full hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-slate-500;
+}
+.pyro_dropdown__trigger_button__with_label {
+  @apply inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md shadow-sm dark:text-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800 dark:focus:bg-slate-800 hover:bg-slate-50 focus:outline-none;
+}
+.pyro_dropdown__trigger_button__with_label_and_trigger {
+  @apply align-middle hover:text-slate-600 focus:outline-none;
+}
+.pyro_dropdown__ellipsis {
+  @apply w-5 h-5;
+}
